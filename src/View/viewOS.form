@@ -455,6 +455,9 @@
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Excluir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bttnExcluirOsActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bttnImprimirOS">
       <Properties>
@@ -485,6 +488,9 @@
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Alterar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bttnAlterarOsActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

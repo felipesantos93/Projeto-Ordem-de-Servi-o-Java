@@ -262,6 +262,11 @@ public class viewOS extends javax.swing.JInternalFrame {
 
         bttnExcluirOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/icons8-excluir-lixeira-48.png"))); // NOI18N
         bttnExcluirOs.setToolTipText("Excluir");
+        bttnExcluirOs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnExcluirOsActionPerformed(evt);
+            }
+        });
 
         bttnImprimirOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/icons8-enviar-para-a-impressora-48.png"))); // NOI18N
         bttnImprimirOS.setToolTipText("Imprimir");
@@ -277,6 +282,11 @@ public class viewOS extends javax.swing.JInternalFrame {
 
         bttnAlterarOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/icons8-pencil-drawing-48.png"))); // NOI18N
         bttnAlterarOs.setToolTipText("Alterar");
+        bttnAlterarOs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnAlterarOsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -416,6 +426,14 @@ public class viewOS extends javax.swing.JInternalFrame {
        pesquisarOS();
     }//GEN-LAST:event_bttnPesquisarOsActionPerformed
 
+    private void bttnAlterarOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnAlterarOsActionPerformed
+      alterarOs();
+    }//GEN-LAST:event_bttnAlterarOsActionPerformed
+
+    private void bttnExcluirOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnExcluirOsActionPerformed
+     excluirOs();
+    }//GEN-LAST:event_bttnExcluirOsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnAlterarOs;
@@ -507,7 +525,9 @@ public class viewOS extends javax.swing.JInternalFrame {
         }
     }
         // método abaixo limpa os campos do formulario
-    public void limparCampos() {
+    private void limparCampos() {
+        txtDataOS.setText("");
+        txtNumeroOs.setText("");
         txtEquipamentoOS.setText("");
         txtDefeitoOS.setText("");
         txtServicoOS.setText("");
@@ -516,22 +536,107 @@ public class viewOS extends javax.swing.JInternalFrame {
         
     }
      // método abaixo pesquisa Os
-    public void pesquisarOS(){
+    private void pesquisarOS(){
         //a linha abaixo cria uma caixa de entrada do tipo JOption pane
         String num_os = JOptionPane.showInputDialog("número da OS");
         String sql = " SELECT * FROM tbl_os WHERE os =  " + num_os;
         try {
             prst= conn.prepareStatement(sql);
-            rs=prst.executeQuery();
+            rs = prst.executeQuery();
             if (rs.next()) {
-                //txtDataOS
+                txtNumeroOs.setText(rs.getString(1));
+                txtDataOS.setText(rs.getString(2));
+                //setando os radio buttons
+                String rbtTipo = rs.getString(3);
+                if (rbtTipo.equals("Orçamento")) {
+                    rbttnOrcamento.setSelected(true);
+                    tipo = "Orçamento";
+
+                } else {
+                    rbttnOrdemDeServico.setSelected(true);
+                    tipo = "Ordem de Serviço";
+                }
+                cbxOS.setSelectedItem(rs.getString(4));
+                txtEquipamentoOS.setText(rs.getString(5));
+                txtDefeitoOS.setText(rs.getString(6));
+                txtServicoOS.setText(rs.getString(7));
+                txtTecnicoOS.setText(rs.getString(8));
+                txtValoOS.setText(rs.getString(9));
+                txtIdClienteOS.setText(rs.getString(10));
+                // evitando problemas com o botao salvar
+                bttnSalvarOS.setEnabled(false);
+                txtPesquisaClienteOS.setEnabled(false);
+                tabelaClienteOS.setVisible(false);
+
             } else {
-            }
+                JOptionPane.showMessageDialog(null, "OS não cadastrada");
+            }   
+        } catch (java.sql.SQLSyntaxErrorException erro) {
+            JOptionPane.showMessageDialog(null, "OS inválida");     
+        } catch (SQLException erro2){
+            JOptionPane.showMessageDialog(null, erro2);   
             
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "OS não cadastrada");
         }
     }
+    
+    private void alterarOs(){
+    
+    String sql = "UPDATE tbl_os SET tipo = ? , situacao = ?, equipamento = ?, defeito = ?, servico = ?, tecnico = ?, valor = ? WHERE os = ?";
+        try {
+            prst = conn.prepareStatement(sql);
+            prst.setString(1, tipo);
+            prst.setString(2, cbxOS.getSelectedItem().toString());
+            prst.setString(3, txtEquipamentoOS.getText());
+            prst.setString(4, txtDefeitoOS.getText());
+            prst.setString(5, txtServicoOS.getText());
+            prst.setString(6, txtTecnicoOS.getText());
+            //substitui , po .
+            prst.setString(7, txtValoOS.getText().replace(",", "."));
+            prst.setString(8, txtNumeroOs.getText());
+
+            //validacao dos campos obrigatorios
+            if ((txtIdClienteOS.getText().isEmpty()) || (txtEquipamentoOS.getText().isEmpty()) || (txtDefeitoOS.getText().isEmpty())) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
+            } else {
+                prst.executeUpdate();
+                limparCampos();
+               
+                // habilitando objetos
+                bttnSalvarOS.setEnabled(true);
+                txtPesquisaClienteOS.setEnabled(true);
+                tabelaClienteOS.setVisible(true);
+                prst.close();
+                JOptionPane.showMessageDialog(null, "OS alterada com sucesso!");
+            }
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null,  "alterarOs"+ erro);
+           
+        } 
+    }
+    private void excluirOs(){
+        int confirma = JOptionPane.showConfirmDialog(null, "Tem ceteza que deseja excluir essa OS?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if (confirma== JOptionPane.YES_NO_OPTION) {
+            String sql = "DELETE FROM tbl_os WHERE os = ?";
+            try {
+                prst= conn.prepareStatement(sql);
+                prst.setString(1, txtNumeroOs.getText());
+                prst.executeUpdate();
+                JOptionPane.showMessageDialog(null,  "OS excluida com sucesso!");
+                 limparCampos();
+               
+                // habilitando objetos
+                bttnSalvarOS.setEnabled(true);
+                txtPesquisaClienteOS.setEnabled(true);
+                tabelaClienteOS.setVisible(true);
+                prst.close();
+            } catch (Exception erro) {
+                 JOptionPane.showMessageDialog(null,  "excluirOs"+ erro);
+            }
+            
+        } 
+        
+    }
+
    
     }
  
