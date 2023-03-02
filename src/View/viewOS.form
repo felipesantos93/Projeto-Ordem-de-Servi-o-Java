@@ -173,17 +173,28 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="txtNumeroOs" alignment="0" max="32767" attributes="0"/>
-                          <Component id="rbttnOrcamento" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="rbttnOrcamento" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="rbttnOrdemDeServico" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="rbttnOrdemDeServico" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDataOS" min="-2" pref="115" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNumeroOs" min="-2" pref="81" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="txtDataOS" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -260,15 +271,16 @@
     <Component class="javax.swing.JComboBox" name="cbxOS">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="8">
-            <StringItem index="0" value="Na Bancada"/>
-            <StringItem index="1" value="Entrega OK"/>
-            <StringItem index="2" value="Or&#xe7;amento reprovado"/>
-            <StringItem index="3" value="Aguardando aprova&#xe7;&#xe3;o"/>
-            <StringItem index="4" value="Aguardando pe&#xe7;as"/>
-            <StringItem index="5" value="Abandonado pelo cliente"/>
-            <StringItem index="6" value="Retornou"/>
-            <StringItem index="7" value=" "/>
+          <StringArray count="9">
+            <StringItem index="0" value=" "/>
+            <StringItem index="1" value="Na Bancada"/>
+            <StringItem index="2" value="Entrega OK"/>
+            <StringItem index="3" value="Or&#xe7;amento reprovado"/>
+            <StringItem index="4" value="Aguardando aprova&#xe7;&#xe3;o"/>
+            <StringItem index="5" value="Aguardando pe&#xe7;as"/>
+            <StringItem index="6" value="Abandonado pelo cliente"/>
+            <StringItem index="7" value="Retornou"/>
+            <StringItem index="8" value=" "/>
           </StringArray>
         </Property>
       </Properties>
@@ -411,6 +423,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="0"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtValoOSActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -454,6 +469,7 @@
           <Image iconType="3" name="/Icones/icons8-excluir-lixeira-48.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Excluir"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bttnExcluirOsActionPerformed"/>
@@ -468,6 +484,7 @@
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
         </Property>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="bttnPesquisarOs">
@@ -487,6 +504,7 @@
           <Image iconType="3" name="/Icones/icons8-pencil-drawing-48.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Alterar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bttnAlterarOsActionPerformed"/>

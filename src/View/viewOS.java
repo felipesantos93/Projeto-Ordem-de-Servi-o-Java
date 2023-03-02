@@ -140,15 +140,22 @@ public class viewOS extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtNumeroOs, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(rbttnOrcamento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rbttnOrdemDeServico)
-                    .addComponent(txtDataOS, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(rbttnOrcamento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rbttnOrdemDeServico))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(txtNumeroOs, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtDataOS)
+                                .addGap(2, 2, 2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -169,7 +176,7 @@ public class viewOS extends javax.swing.JInternalFrame {
                 .addGap(26, 26, 26))
         );
 
-        cbxOS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Na Bancada", "Entrega OK", "Orçamento reprovado", "Aguardando aprovação", "Aguardando peças", "Abandonado pelo cliente", "Retornou", " " }));
+        cbxOS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Na Bancada", "Entrega OK", "Orçamento reprovado", "Aguardando aprovação", "Aguardando peças", "Abandonado pelo cliente", "Retornou", " " }));
         cbxOS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxOSActionPerformed(evt);
@@ -241,6 +248,11 @@ public class viewOS extends javax.swing.JInternalFrame {
         );
 
         txtValoOS.setText("0");
+        txtValoOS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtValoOSActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("* Equipamento:");
 
@@ -262,6 +274,7 @@ public class viewOS extends javax.swing.JInternalFrame {
 
         bttnExcluirOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/icons8-excluir-lixeira-48.png"))); // NOI18N
         bttnExcluirOs.setToolTipText("Excluir");
+        bttnExcluirOs.setEnabled(false);
         bttnExcluirOs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttnExcluirOsActionPerformed(evt);
@@ -271,6 +284,7 @@ public class viewOS extends javax.swing.JInternalFrame {
         bttnImprimirOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/icons8-enviar-para-a-impressora-48.png"))); // NOI18N
         bttnImprimirOS.setToolTipText("Imprimir");
         bttnImprimirOS.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bttnImprimirOS.setEnabled(false);
 
         bttnPesquisarOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/icons8-magnifying-glass-48.png"))); // NOI18N
         bttnPesquisarOs.setToolTipText("Pesquisar");
@@ -282,6 +296,7 @@ public class viewOS extends javax.swing.JInternalFrame {
 
         bttnAlterarOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/icons8-pencil-drawing-48.png"))); // NOI18N
         bttnAlterarOs.setToolTipText("Alterar");
+        bttnAlterarOs.setEnabled(false);
         bttnAlterarOs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttnAlterarOsActionPerformed(evt);
@@ -414,7 +429,7 @@ public class viewOS extends javax.swing.JInternalFrame {
 
     private void bttnSalvarOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnSalvarOSActionPerformed
         emitirOS();
-        limparCampos();
+       
     }//GEN-LAST:event_bttnSalvarOSActionPerformed
 
     private void tabelaClienteOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClienteOSMouseClicked
@@ -433,6 +448,10 @@ public class viewOS extends javax.swing.JInternalFrame {
     private void bttnExcluirOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnExcluirOsActionPerformed
      excluirOs();
     }//GEN-LAST:event_bttnExcluirOsActionPerformed
+
+    private void txtValoOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValoOSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtValoOSActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -511,35 +530,51 @@ public class viewOS extends javax.swing.JInternalFrame {
             prst.setString(8, txtIdClienteOS.getText());
 
             //validacao dos campos obrigatorios
-            if ((txtIdClienteOS.getText().isEmpty()) || (txtEquipamentoOS.getText().isEmpty()) || (txtDefeitoOS.getText().isEmpty())) {
+            if ((txtIdClienteOS.getText().isEmpty()) || (txtEquipamentoOS.getText().isEmpty()) || (txtDefeitoOS.getText().isEmpty()) || cbxOS.getSelectedItem().equals(" ")) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
             } else {
-                int adicionado = prst.executeUpdate();
-                if (adicionado > 0) {
-                    JOptionPane.showMessageDialog(null, "OS emitida com sucesso!");
-                }
+                prst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "OS emitida com sucesso!");
+                bttnSalvarOS.setEnabled(false);
+                bttnPesquisarOs.setEnabled(false);
+                bttnImprimirOS.setEnabled(true);
                 prst.close();
             }
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "emitirOs: " + erro);
         }
     }
-        // método abaixo limpa os campos do formulario
+        // gerenciador de botoes
     private void limparCampos() {
-        txtDataOS.setText("");
-        txtNumeroOs.setText("");
-        txtEquipamentoOS.setText("");
-        txtDefeitoOS.setText("");
-        txtServicoOS.setText("");
-        txtTecnicoOS.setText("");
-        txtValoOS.setText("");
+        //limpar campos
+        txtDataOS.setText(" ");
+        txtIdClienteOS.setText(" ");
+        txtNumeroOs.setText(" ");
+        txtEquipamentoOS.setText(" ");
+        txtDefeitoOS.setText(" ");
+        txtServicoOS.setText(" ");
+        txtTecnicoOS.setText(" ");
+        txtValoOS.setText("0");
+        txtPesquisaClienteOS.setText(" ");
+        ((DefaultTableModel) tabelaClienteOS.getModel()).setRowCount(0);
+        cbxOS.setSelectedItem(" ");
+        //habilitar objetos
+        bttnSalvarOS.setEnabled(true);
+        bttnPesquisarOs.setEnabled(true);
+        txtPesquisaClienteOS.setEnabled(true);
+        tabelaClienteOS.setVisible(true);
+        //desabilitar objetos
+        bttnAlterarOs.setEnabled(false);
+        bttnExcluirOs.setEnabled(false);
+        bttnImprimirOS.setEnabled(false);
+
         
     }
-     // método abaixo pesquisa Os
+     // método abaixo pesquisa Osad
     private void pesquisarOS(){
         //a linha abaixo cria uma caixa de entrada do tipo JOption pane
         String num_os = JOptionPane.showInputDialog("número da OS");
-        String sql = " SELECT * FROM tbl_os WHERE os =  " + num_os;
+        String sql = " SELECT os, date_format(data_os,'%d/%m/%Y - %H:%i'), tipo, situacao, equipamento, defeito, servico, tecnico, valor, id_cliente FROM tbl_os WHERE os = " + num_os;
         try {
             prst= conn.prepareStatement(sql);
             rs = prst.executeQuery();
@@ -563,10 +598,15 @@ public class viewOS extends javax.swing.JInternalFrame {
                 txtTecnicoOS.setText(rs.getString(8));
                 txtValoOS.setText(rs.getString(9));
                 txtIdClienteOS.setText(rs.getString(10));
-                // evitando problemas com o botao salvar
+               //evitando problemas com o botao salvar
                 bttnSalvarOS.setEnabled(false);
+                bttnPesquisarOs.setEnabled(false);
                 txtPesquisaClienteOS.setEnabled(false);
                 tabelaClienteOS.setVisible(false);
+                //habilitar botoes
+                bttnAlterarOs.setEnabled(true);
+                bttnExcluirOs.setEnabled(true);
+                bttnImprimirOS.setEnabled(true);
 
             } else {
                 JOptionPane.showMessageDialog(null, "OS não cadastrada");
@@ -595,18 +635,13 @@ public class viewOS extends javax.swing.JInternalFrame {
             prst.setString(8, txtNumeroOs.getText());
 
             //validacao dos campos obrigatorios
-            if ((txtIdClienteOS.getText().isEmpty()) || (txtEquipamentoOS.getText().isEmpty()) || (txtDefeitoOS.getText().isEmpty())) {
+            if ((txtIdClienteOS.getText().isEmpty()) || (txtEquipamentoOS.getText().isEmpty()) || (txtDefeitoOS.getText().isEmpty()) || cbxOS.getSelectedItem().equals(" ")) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
             } else {
-                prst.executeUpdate();
-                limparCampos();
-               
-                // habilitando objetos
-                bttnSalvarOS.setEnabled(true);
-                txtPesquisaClienteOS.setEnabled(true);
-                tabelaClienteOS.setVisible(true);
-                prst.close();
+                prst.executeUpdate();    
                 JOptionPane.showMessageDialog(null, "OS alterada com sucesso!");
+                limparCampos();
+                prst.close();
             }
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null,  "alterarOs"+ erro);
@@ -624,11 +659,7 @@ public class viewOS extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,  "OS excluida com sucesso!");
                  limparCampos();
                
-                // habilitando objetos
-                bttnSalvarOS.setEnabled(true);
-                txtPesquisaClienteOS.setEnabled(true);
-                tabelaClienteOS.setVisible(true);
-                prst.close();
+              
             } catch (Exception erro) {
                  JOptionPane.showMessageDialog(null,  "excluirOs"+ erro);
             }
@@ -637,7 +668,7 @@ public class viewOS extends javax.swing.JInternalFrame {
         
     }
 
-   
+     
     }
  
 
