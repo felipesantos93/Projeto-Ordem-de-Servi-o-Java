@@ -18,7 +18,7 @@ public class ConexaoBD {
 	Connection conn = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");	
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestaoservico?serverTimezone=UTC", "root", "120993"); 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestaoservico?characterEncoding=utf-8", "newuser", "Os123456"); 
 		
 			
 		} catch (ClassNotFoundException | SQLException erro ) {
