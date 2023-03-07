@@ -193,8 +193,7 @@ public class viewLogin extends javax.swing.JFrame {
                 viewPrincipal.lblUsuario.setText(rs.getString(2)); //exibe o nome do usuario na tela
                 viewPrincipal.lblUsuario.setForeground(Color.red);
                 //acesso pelos botões
-                viewPrincipal.bttnUsuario.setEnabled(true);
-                viewPrincipal.bttnRelatorio.setEnabled(true);
+           
                
                 dispose(); // fechar tela     
                 } else {
