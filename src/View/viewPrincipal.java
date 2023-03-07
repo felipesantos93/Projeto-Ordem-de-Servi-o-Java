@@ -7,18 +7,27 @@ package view;
 import java.text.DateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import java.sql.*;
+import DAO.ConexaoBD;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+
 
 /**
  *
  * @author Felipe
  */
 public class viewPrincipal extends javax.swing.JFrame {
+    
+    Connection  conn = null;
 
     /**
      * Creates new form viewPrincipal
      */
     public viewPrincipal() {
         initComponents();
+        conn = ConexaoBD.conectar();
     }
 
     /**
@@ -38,13 +47,13 @@ public class viewPrincipal extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         bttnCliente = new javax.swing.JButton();
         bttnSobre = new javax.swing.JButton();
-        bttnRelatorio = new javax.swing.JButton();
         menu = new javax.swing.JMenuBar();
         menCadastro = new javax.swing.JMenu();
         menCadastroCliente = new javax.swing.JMenuItem();
         menCadastroOs = new javax.swing.JMenuItem();
         menCadastroUsuario = new javax.swing.JMenuItem();
         menRelatorio = new javax.swing.JMenu();
+        menRelatorioClientes = new javax.swing.JMenuItem();
         menRelatorioServicos = new javax.swing.JMenuItem();
         menAjuda = new javax.swing.JMenu();
         menAjudaSobre = new javax.swing.JMenuItem();
@@ -121,15 +130,6 @@ public class viewPrincipal extends javax.swing.JFrame {
             }
         });
 
-        bttnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/icons8-business-16.png"))); // NOI18N
-        bttnRelatorio.setText("Relátorio");
-        bttnRelatorio.setEnabled(false);
-        bttnRelatorio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnRelatorioActionPerformed(evt);
-            }
-        });
-
         menCadastro.setText("Arquivo");
 
         menCadastroCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -164,6 +164,15 @@ public class viewPrincipal extends javax.swing.JFrame {
 
         menRelatorio.setText("Relatório");
         menRelatorio.setEnabled(false);
+
+        menRelatorioClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        menRelatorioClientes.setText("Clientes");
+        menRelatorioClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menRelatorioClientesActionPerformed(evt);
+            }
+        });
+        menRelatorio.add(menRelatorioClientes);
 
         menRelatorioServicos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK));
         menRelatorioServicos.setText("Serviços");
@@ -223,8 +232,6 @@ public class viewPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(bttnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bttnRelatorio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(descktop, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -250,9 +257,7 @@ public class viewPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(bttnSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bttnSair)
-                            .addComponent(bttnRelatorio))))
+                        .addComponent(bttnSair)))
                 .addContainerGap())
         );
 
@@ -318,10 +323,6 @@ public class viewPrincipal extends javax.swing.JFrame {
         descktop.add(usuario);
     }//GEN-LAST:event_menCadastroUsuarioActionPerformed
 
-    private void bttnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnRelatorioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bttnRelatorioActionPerformed
-
     private void bttnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnUsuarioActionPerformed
          // as linhas abaixo vão abrir através do botão usuario a viewUsuarios dentro do painel desktop pane.
         viewUsuario usuario =  new viewUsuario();
@@ -349,6 +350,23 @@ public class viewPrincipal extends javax.swing.JFrame {
         os.setVisible(true);
         descktop.add(os);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void menRelatorioClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRelatorioClientesActionPerformed
+        // gerando impressão do relatorio  de clientes
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a impressão deste relatório?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if (confirma == JOptionPane.YES_NO_OPTION) {
+            // imprimindo relatorio com o framework jasperReport
+            try {
+                // usando a classe JasperPrint para preparar a impressão de um relatorio
+                JasperPrint print = JasperFillManager.fillReport("C:/reports/client.jasper", null, conn);
+                // a linha abaixo exibi o relatorio atraves da classe JasperViewer
+                JasperViewer.viewReport(print,false);
+            } catch (Exception erro) {
+                JOptionPane.showMessageDialog(null, "menRelatorioClientes" + erro);
+            }
+        } else {
+        }
+    }//GEN-LAST:event_menRelatorioClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -387,7 +405,6 @@ public class viewPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnCliente;
-    public static javax.swing.JButton bttnRelatorio;
     private javax.swing.JButton bttnSair;
     private javax.swing.JButton bttnSobre;
     public static javax.swing.JButton bttnUsuario;
@@ -404,6 +421,7 @@ public class viewPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menOpcoesSair;
     private javax.swing.JMenu menOpções;
     public static javax.swing.JMenu menRelatorio;
+    private javax.swing.JMenuItem menRelatorioClientes;
     private javax.swing.JMenuItem menRelatorioServicos;
     private javax.swing.JMenuBar menu;
     // End of variables declaration//GEN-END:variables
