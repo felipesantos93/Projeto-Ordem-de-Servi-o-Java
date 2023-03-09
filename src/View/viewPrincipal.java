@@ -43,10 +43,10 @@ public class viewPrincipal extends javax.swing.JFrame {
         lblUsuario = new javax.swing.JLabel();
         lblData = new javax.swing.JLabel();
         bttnSair = new javax.swing.JButton();
-        bttnUsuario = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        bttnOs = new javax.swing.JButton();
         bttnCliente = new javax.swing.JButton();
         bttnSobre = new javax.swing.JButton();
+        bttnUsuario = new javax.swing.JButton();
         menu = new javax.swing.JMenuBar();
         menCadastro = new javax.swing.JMenu();
         menCadastroCliente = new javax.swing.JMenuItem();
@@ -97,25 +97,16 @@ public class viewPrincipal extends javax.swing.JFrame {
             }
         });
 
-        bttnUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/icons8-team-48.png"))); // NOI18N
-        bttnUsuario.setText("Usuários");
-        bttnUsuario.setEnabled(false);
-        bttnUsuario.addActionListener(new java.awt.event.ActionListener() {
+        bttnOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/os-48.png"))); // NOI18N
+        bttnOs.setToolTipText("Ordem de Seviço");
+        bttnOs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnUsuarioActionPerformed(evt);
-            }
-        });
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/os-48.png"))); // NOI18N
-        jButton3.setText("OS");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                bttnOsActionPerformed(evt);
             }
         });
 
         bttnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/icons8-people.gif"))); // NOI18N
-        bttnCliente.setText("Clientes");
+        bttnCliente.setToolTipText("Cadastrar Clientes");
         bttnCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttnClienteActionPerformed(evt);
@@ -123,10 +114,19 @@ public class viewPrincipal extends javax.swing.JFrame {
         });
 
         bttnSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/icons8-about-48.png"))); // NOI18N
-        bttnSobre.setText("Sobre");
+        bttnSobre.setToolTipText("Sobre");
         bttnSobre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttnSobreActionPerformed(evt);
+            }
+        });
+
+        bttnUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/icons8-team-48.png"))); // NOI18N
+        bttnUsuario.setToolTipText("Cadastrar Usuário");
+        bttnUsuario.setEnabled(false);
+        bttnUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnUsuarioActionPerformed(evt);
             }
         });
 
@@ -221,13 +221,13 @@ public class viewPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 40, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bttnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bttnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bttnSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bttnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(bttnOs, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(bttnSobre, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addComponent(lblUsuario)
-                            .addComponent(lblData))
+                            .addComponent(lblData)
+                            .addComponent(bttnUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(36, 36, 36))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -253,7 +253,7 @@ public class viewPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(bttnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bttnOs, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(bttnSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -307,7 +307,19 @@ public class viewPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menAjudaSobreActionPerformed
 
     private void menRelatorioServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRelatorioServicosActionPerformed
-        // TODO add your handling code here:
+          // gerando impressão do relatorio  de serviços
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a emissão deste relatório?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if (confirma == JOptionPane.YES_NO_OPTION) {
+            // imprimindo relatorio com o framework jasperReport
+            try {
+                // usando a classe JasperPrint para preparar a impressão de um relatorio
+                JasperPrint print = JasperFillManager.fillReport("C:/reports/servicos.jasper", null, conn);
+                // a linha abaixo exibi o relatorio atraves da classe JasperViewer
+                JasperViewer.viewReport(print,false);
+            } catch (Exception erro) {
+                JOptionPane.showMessageDialog(null, "menRelatorioServico" + erro);
+            }
+        } 
     }//GEN-LAST:event_menRelatorioServicosActionPerformed
 
     private void bttnSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnSobreActionPerformed
@@ -323,13 +335,6 @@ public class viewPrincipal extends javax.swing.JFrame {
         descktop.add(usuario);
     }//GEN-LAST:event_menCadastroUsuarioActionPerformed
 
-    private void bttnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnUsuarioActionPerformed
-         // as linhas abaixo vão abrir através do botão usuario a viewUsuarios dentro do painel desktop pane.
-        viewUsuario usuario =  new viewUsuario();
-        usuario.setVisible(true);
-        descktop.add(usuario);
-    }//GEN-LAST:event_bttnUsuarioActionPerformed
-
     private void bttnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnClienteActionPerformed
          // as linhas abaixo vão abrir através do botão cliente a viewCliente dentro do painel desktop pane.
         viewCliente cliente = new viewCliente();
@@ -344,12 +349,12 @@ public class viewPrincipal extends javax.swing.JFrame {
         descktop.add(os);
     }//GEN-LAST:event_menCadastroOsActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void bttnOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnOsActionPerformed
         // as linhas abaixo vão abrir através do botão cliente a viewCliente dentro do painel desktop pane.
         viewOS os = new viewOS();
         os.setVisible(true);
         descktop.add(os);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_bttnOsActionPerformed
 
     private void menRelatorioClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRelatorioClientesActionPerformed
         // gerando impressão do relatorio  de clientes
@@ -364,9 +369,16 @@ public class viewPrincipal extends javax.swing.JFrame {
             } catch (Exception erro) {
                 JOptionPane.showMessageDialog(null, "menRelatorioClientes" + erro);
             }
-        } else {
+        
         }
     }//GEN-LAST:event_menRelatorioClientesActionPerformed
+
+    private void bttnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnUsuarioActionPerformed
+         // as linhas abaixo vão abrir através do botão usuario a viewUsuarios dentro do painel desktop pane.
+        viewUsuario usuario =  new viewUsuario();
+        usuario.setVisible(true);
+        descktop.add(usuario);
+    }//GEN-LAST:event_bttnUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -405,11 +417,11 @@ public class viewPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnCliente;
+    private javax.swing.JButton bttnOs;
     private javax.swing.JButton bttnSair;
     private javax.swing.JButton bttnSobre;
     public static javax.swing.JButton bttnUsuario;
     private javax.swing.JPanel descktop;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel lblData;
     public static javax.swing.JLabel lblUsuario;
     private javax.swing.JMenu menAjuda;
@@ -425,4 +437,10 @@ public class viewPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menRelatorioServicos;
     private javax.swing.JMenuBar menu;
     // End of variables declaration//GEN-END:variables
+ // as linhas abaixo vão abrir através do botão usuario a viewUsuarios dentro do painel desktop pane.
+  //      viewUsuario usuario =  new viewUsuario();
+   //     usuario.setVisible(true);
+  //      descktop.add(usuario);
+
+
 }
