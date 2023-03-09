@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import DAO.ConexaoBD;
+
 /**
  *
  * @author Felipe
@@ -193,9 +194,10 @@ public class viewLogin extends javax.swing.JFrame {
                 viewPrincipal.lblUsuario.setText(rs.getString(2)); //exibe o nome do usuario na tela
                 viewPrincipal.lblUsuario.setForeground(Color.red);
                 //acesso pelos botões
-           
+                viewPrincipal.bttnUsuario.setEnabled(true);
+                
                
-                dispose(); // fechar tela     
+                    
                 } else {
                 //Se o perfil não for "admin" tem acesso apenas a pagina principal sem o demais recusos.
                     viewPrincipal objPrincipal = new viewPrincipal();
