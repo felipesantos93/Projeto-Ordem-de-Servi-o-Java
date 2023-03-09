@@ -166,10 +166,9 @@ public class viewLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtSenhaUsuario;
     // End of variables declaration//GEN-END:variables
 
-
-   //logar usuario no sistema
-     private void logar() {
-     try {
+    //logar usuario no sistema
+    private void logar() {
+        try {
             // as  linhas abaixo preparam  a consulta em função do que foi digitado nas caixas de texto. 
             //O ? é substituido pelo conteudo das variaveis que são armazenadas em prst.setSting
             String sql = "SELECT * FROM tbl_usuario WHERE login_usuario= ? and senha_usuario = ?";
@@ -186,46 +185,32 @@ public class viewLogin extends javax.swing.JFrame {
                 // as linhas abaixo fazem o tratamento do perfil do usuario, para saber se ele tem acesso a determinados recursos. 
                 //Se o perfil fo "admin" tem acesso a relatorio e cadatros de novos usuarios.
                 if (perfil.equals("admin")) {
-                viewPrincipal objPrincipal = new viewPrincipal();
-                objPrincipal.setVisible(true); // mostrar tela
-                //acesso pelo menu
-                viewPrincipal.menRelatorio.setEnabled(true);
-                viewPrincipal.menCadastroUsuario.setEnabled(true);
-                viewPrincipal.lblUsuario.setText(rs.getString(2)); //exibe o nome do usuario na tela
-                viewPrincipal.lblUsuario.setForeground(Color.red);
-                //acesso pelos botões
-                viewPrincipal.bttnUsuario.setEnabled(true);
-                
-               
-                    
+                    viewPrincipal objPrincipal = new viewPrincipal();
+                    objPrincipal.setVisible(true); // mostrar tela
+                    //acesso pelo menu
+                    viewPrincipal.menRelatorio.setEnabled(true);
+                    viewPrincipal.menCadastroUsuario.setEnabled(true);
+                    viewPrincipal.lblUsuario.setText(rs.getString(2)); //exibe o nome do usuario na tela
+                    viewPrincipal.lblUsuario.setForeground(Color.red);
+                    //acesso pelos botões
+                    viewPrincipal.bttnUsuario.setEnabled(true);
+                    dispose(); // fechar tela 
                 } else {
-                //Se o perfil não for "admin" tem acesso apenas a pagina principal sem o demais recusos.
+                    //Se o perfil não for "admin" tem acesso apenas a pagina principal sem o demais recusos.
                     viewPrincipal objPrincipal = new viewPrincipal();
                     objPrincipal.setVisible(true); // mostrar tela
                     viewPrincipal.lblUsuario.setText(rs.getString(2)); //exibe o nome do usuario na tel
                     dispose(); // fechar tela 
                 }
-                
-                
             } else {
                 // enviar mensagem de erro
                 JOptionPane.showMessageDialog(null, "Usuário ou Senha Inválida");
             }
-           
-            //preparaçao e execuçao com sucesso = usuario autenticado. 
+                //preparaçao e execuçao com sucesso = usuario autenticado. 
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "UsuarioDAO: " + erro);
-            //usuario não autenticado, vai retornar um excessão.
-            
+                JOptionPane.showMessageDialog(null, "UsuarioDAO: " + erro);
+                 //usuario não autenticado, vai retornar um excessão.
         }
-     }
-         
-      
+    }
 }
-
-      
-
-
-
-
 
