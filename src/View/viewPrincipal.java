@@ -9,6 +9,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import java.sql.*;
 import DAO.ConexaoBD;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
@@ -366,7 +367,7 @@ public class viewPrincipal extends javax.swing.JFrame {
                 JasperPrint print = JasperFillManager.fillReport("C:/reports/client.jasper", null, conn);
                 // a linha abaixo exibi o relatorio atraves da classe JasperViewer
                 JasperViewer.viewReport(print,false);
-            } catch (Exception erro) {
+            } catch (JRException erro) {
                 JOptionPane.showMessageDialog(null, "menRelatorioClientes" + erro);
             }
         
@@ -437,10 +438,6 @@ public class viewPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menRelatorioServicos;
     private javax.swing.JMenuBar menu;
     // End of variables declaration//GEN-END:variables
- // as linhas abaixo vão abrir através do botão usuario a viewUsuarios dentro do painel desktop pane.
-  //      viewUsuario usuario =  new viewUsuario();
-   //     usuario.setVisible(true);
-  //      descktop.add(usuario);
-
+ 
 
 }
