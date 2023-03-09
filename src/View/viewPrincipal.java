@@ -364,7 +364,7 @@ public class viewPrincipal extends javax.swing.JFrame {
             // imprimindo relatorio com o framework jasperReport
             try {
                 // usando a classe JasperPrint para preparar a impressão de um relatorio
-                JasperPrint print = JasperFillManager.fillReport("C:/reports/client.jasper", null, conn);
+                JasperPrint print = JasperFillManager.fillReport("C:/reports/clientes.jasper", null, conn);
                 // a linha abaixo exibi o relatorio atraves da classe JasperViewer
                 JasperViewer.viewReport(print,false);
             } catch (JRException erro) {
