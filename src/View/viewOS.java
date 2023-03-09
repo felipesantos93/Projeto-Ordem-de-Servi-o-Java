@@ -16,6 +16,11 @@ import net.proteanit.sql.DbUtils;
 import DAO.ConexaoBD;
 import java.awt.HeadlessException;
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 /**
@@ -285,6 +290,11 @@ public class viewOS extends javax.swing.JInternalFrame {
         bttnImprimirOS.setToolTipText("Imprimir");
         bttnImprimirOS.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bttnImprimirOS.setEnabled(false);
+        bttnImprimirOS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnImprimirOSActionPerformed(evt);
+            }
+        });
 
         bttnPesquisarOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/icons8-magnifying-glass-48.png"))); // NOI18N
         bttnPesquisarOs.setToolTipText("Pesquisar");
@@ -453,6 +463,11 @@ public class viewOS extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtValoOSActionPerformed
 
+    private void bttnImprimirOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnImprimirOSActionPerformed
+        ImprimindoOs();
+        limparCampos();
+    }//GEN-LAST:event_bttnImprimirOSActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnAlterarOs;
@@ -535,6 +550,8 @@ public class viewOS extends javax.swing.JInternalFrame {
             } else {
                 prst.executeUpdate();
                 JOptionPane.showMessageDialog(null, "OS emitida com sucesso!");
+                //recuperar os
+                recuperarOs();
                 bttnSalvarOS.setEnabled(false);
                 bttnPesquisarOs.setEnabled(false);
                 bttnImprimirOS.setEnabled(true);
@@ -667,7 +684,41 @@ public class viewOS extends javax.swing.JInternalFrame {
         } 
         
     }
-
+    
+    private void ImprimindoOs(){
+        // gerando impressão Os
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a impressão de Os?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if (confirma == JOptionPane.YES_NO_OPTION) {
+            // imprimindo Os com o framework jasperReport
+            try {
+                //usando a classe HashMap para criar um filtro por periodo  
+                HashMap filtro = new HashMap();
+                filtro.put("os", Integer.parseInt(txtNumeroOs.getText()));
+                // usando a classe JasperPrint para preparar a impressão de Os
+                JasperPrint print = JasperFillManager.fillReport("C:/reports/os.jasper", filtro, conn);
+                // a linha abaixo exibi o relatorio atraves da classe JasperViewer
+                JasperViewer.viewReport(print,false);
+            } catch (JRException erro) {
+                JOptionPane.showMessageDialog(null, "Imprimindo Os" + erro);
+            }
+        
+        }
+    }
+    
+    private void recuperarOs(){
+        // esse método corrige bug na impressão da Os logo depois de cadastrada, pois recuperar o ultimo numero da Os que é gerado automaticamente. 
+        String sql;
+        sql = "SELECT max(os)FROM tbl_os";
+        try {
+            prst= conn.prepareStatement(sql);
+            rs=prst.executeQuery();
+            if (rs.next()) {
+                txtNumeroOs.setText(rs.getString(1));
+            }
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, erro);
+        }
+    }
      
     }
  
