@@ -412,12 +412,24 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="txtEquipamentoOS">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEquipamentoOSKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDefeitoOS">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDefeitoOSKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtServicoOS">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtServicoOSKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtTecnicoOS">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTecnicoOSKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtValoOS">
       <Properties>

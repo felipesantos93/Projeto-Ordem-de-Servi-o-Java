@@ -1,6 +1,25 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * The MIT License
+ *
+ * Copyright 2023 Felipe dos Santos.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package view;
 
@@ -15,12 +34,11 @@ import DAO.ConexaoBD;
  * @author Felipe
  */
 public class viewLogin extends javax.swing.JFrame {
-    Connection conn ;  
-    PreparedStatement prst;
-    ResultSet rs ;
 
-    
-   
+    Connection conn;
+    PreparedStatement prst;
+    ResultSet rs;
+
     /**
      * Creates new form viewLogin
      */
@@ -113,11 +131,11 @@ public class viewLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnEntrarActionPerformed
-    logar();
+        logar();
     }//GEN-LAST:event_bttnEntrarActionPerformed
 
     private void txtLoginUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLoginUsuarioKeyPressed
-       if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtSenhaUsuario.requestFocus();
         }
     }//GEN-LAST:event_txtLoginUsuarioKeyPressed
@@ -206,11 +224,10 @@ public class viewLogin extends javax.swing.JFrame {
                 // enviar mensagem de erro
                 JOptionPane.showMessageDialog(null, "Usuário ou Senha Inválida");
             }
-                //preparaçao e execuçao com sucesso = usuario autenticado. 
+            //preparaçao e execuçao com sucesso = usuario autenticado. 
         } catch (SQLException erro) {
-                JOptionPane.showMessageDialog(null, "UsuarioDAO: " + erro);
-                 //usuario não autenticado, vai retornar um excessão.
+            JOptionPane.showMessageDialog(null, "UsuarioDAO: " + erro);
+            //usuario não autenticado, vai retornar um excessão.
         }
     }
 }
-

@@ -1,45 +1,54 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ * The MIT License
+ *
+ * Copyright 2023 Felipe dos Santos.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package view;
 
-
-
 import java.sql.*;
-import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.KeyEvent;
 // a linnha abaixo importa recursos da biblioteca rs2xml.jar (para usar o campo de pesquisar)
 import net.proteanit.sql.DbUtils;
 import DAO.ConexaoBD;
-import java.awt.HeadlessException;
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
 
-
 /**
  *
  * @author Felipe
  */
 public class viewOS extends javax.swing.JInternalFrame {
-    
-    
-    Connection conn ;  
+
+    Connection conn;
     PreparedStatement prst;
-    ResultSet rs ;
-    
-    
+    ResultSet rs;
+
     // a linha abaixo cria uma variavel para armazenar um texto de acordo com radion button selecionado
     private String tipo;
-    
-   
-    
+
     /**
      * Creates new form viewOS
      */
@@ -252,6 +261,30 @@ public class viewOS extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        txtEquipamentoOS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEquipamentoOSKeyPressed(evt);
+            }
+        });
+
+        txtDefeitoOS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDefeitoOSKeyPressed(evt);
+            }
+        });
+
+        txtServicoOS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtServicoOSKeyPressed(evt);
+            }
+        });
+
+        txtTecnicoOS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTecnicoOSKeyPressed(evt);
+            }
+        });
+
         txtValoOS.setText("0");
         txtValoOS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -413,8 +446,8 @@ public class viewOS extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rbttnOrcamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbttnOrcamentoActionPerformed
-       //atribuindo um texto a variavel tipo se for selecionado
-      tipo = "Orçamento";
+        //atribuindo um texto a variavel tipo se for selecionado
+        tipo = "Orçamento";
     }//GEN-LAST:event_rbttnOrcamentoActionPerformed
 
     private void cbxOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOSActionPerformed
@@ -422,8 +455,8 @@ public class viewOS extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbxOSActionPerformed
 
     private void rbttnOrdemDeServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbttnOrdemDeServicoActionPerformed
-           //atribuindo um texto a variavel tipo se for selecionado
-           tipo = "Ordem de Serviço";
+        //atribuindo um texto a variavel tipo se for selecionado
+        tipo = "Ordem de Serviço";
     }//GEN-LAST:event_rbttnOrdemDeServicoActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
@@ -434,29 +467,29 @@ public class viewOS extends javax.swing.JInternalFrame {
 
     private void txtPesquisaClienteOSKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaClienteOSKeyReleased
         // chamando o metodo pesquisar cliente
-       pesquisarClientes();
+        pesquisarClientes();
     }//GEN-LAST:event_txtPesquisaClienteOSKeyReleased
 
     private void bttnSalvarOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnSalvarOSActionPerformed
         emitirOS();
-       
+
     }//GEN-LAST:event_bttnSalvarOSActionPerformed
 
     private void tabelaClienteOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClienteOSMouseClicked
-       // chamando o metodo setarCampos
+        // chamando o metodo setarCampos
         setarCampos();
     }//GEN-LAST:event_tabelaClienteOSMouseClicked
 
     private void bttnPesquisarOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnPesquisarOsActionPerformed
-       pesquisarOS();
+        pesquisarOS();
     }//GEN-LAST:event_bttnPesquisarOsActionPerformed
 
     private void bttnAlterarOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnAlterarOsActionPerformed
-      alterarOs();
+        alterarOs();
     }//GEN-LAST:event_bttnAlterarOsActionPerformed
 
     private void bttnExcluirOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnExcluirOsActionPerformed
-     excluirOs();
+        excluirOs();
     }//GEN-LAST:event_bttnExcluirOsActionPerformed
 
     private void txtValoOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValoOSActionPerformed
@@ -467,6 +500,30 @@ public class viewOS extends javax.swing.JInternalFrame {
         ImprimindoOs();
         limparCampos();
     }//GEN-LAST:event_bttnImprimirOSActionPerformed
+
+    private void txtEquipamentoOSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEquipamentoOSKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtDefeitoOS.requestFocus();
+        }
+    }//GEN-LAST:event_txtEquipamentoOSKeyPressed
+
+    private void txtDefeitoOSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDefeitoOSKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtServicoOS.requestFocus();
+        }
+    }//GEN-LAST:event_txtDefeitoOSKeyPressed
+
+    private void txtServicoOSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtServicoOSKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtTecnicoOS.requestFocus();
+        }
+    }//GEN-LAST:event_txtServicoOSKeyPressed
+
+    private void txtTecnicoOSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTecnicoOSKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtValoOS.requestFocus();
+        }
+    }//GEN-LAST:event_txtTecnicoOSKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -506,7 +563,7 @@ public class viewOS extends javax.swing.JInternalFrame {
 
     //método para  pesquisar clientes pelo nome com filtro
     private void pesquisarClientes() {
-        
+
         // as linhas abaixo criam um apelido aos campos da tabela
         String sql = "SELECT id_cliente AS CODIGO, nome_cliente AS NOME, fone_cliente AS FONE FROM tbl_clientes WHERE nome_cliente LIKE ?";
         try {
@@ -522,16 +579,16 @@ public class viewOS extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "PesquisarClientes: " + erro);
         }
     }
-    
-    private void setarCampos(){
+
+    private void setarCampos() {
         int setar = tabelaClienteOS.getSelectedRow();
         txtIdClienteOS.setText(tabelaClienteOS.getModel().getValueAt(setar, 0).toString());
-        
+
     }
-    
+
     //metodo para cadastrar os
     private void emitirOS() {
-      
+
         String sql = "INSERT INTO tbl_os (tipo, situacao , equipamento, defeito, servico,tecnico, valor, id_cliente ) VALUES (?,?,?,?,?,?,?,?)";
         try {
             prst = conn.prepareStatement(sql);
@@ -561,7 +618,8 @@ public class viewOS extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "emitirOs: " + erro);
         }
     }
-        // gerenciador de botoes
+    // gerenciador de botoes
+
     private void limparCampos() {
         //limpar campos
         txtDataOS.setText(" ");
@@ -585,15 +643,15 @@ public class viewOS extends javax.swing.JInternalFrame {
         bttnExcluirOs.setEnabled(false);
         bttnImprimirOS.setEnabled(false);
 
-        
     }
-     // método abaixo pesquisa Osad
-    private void pesquisarOS(){
+    // método abaixo pesquisa Osad
+
+    private void pesquisarOS() {
         //a linha abaixo cria uma caixa de entrada do tipo JOption pane
         String num_os = JOptionPane.showInputDialog("número da OS");
         String sql = " SELECT os, date_format(data_os,'%d/%m/%Y - %H:%i'), tipo, situacao, equipamento, defeito, servico, tecnico, valor, id_cliente FROM tbl_os WHERE os = " + num_os;
         try {
-            prst= conn.prepareStatement(sql);
+            prst = conn.prepareStatement(sql);
             rs = prst.executeQuery();
             if (rs.next()) {
                 txtNumeroOs.setText(rs.getString(1));
@@ -615,7 +673,7 @@ public class viewOS extends javax.swing.JInternalFrame {
                 txtTecnicoOS.setText(rs.getString(8));
                 txtValoOS.setText(rs.getString(9));
                 txtIdClienteOS.setText(rs.getString(10));
-               //evitando problemas com o botao salvar
+                //evitando problemas com o botao salvar
                 bttnSalvarOS.setEnabled(false);
                 bttnPesquisarOs.setEnabled(false);
                 txtPesquisaClienteOS.setEnabled(false);
@@ -627,18 +685,18 @@ public class viewOS extends javax.swing.JInternalFrame {
 
             } else {
                 JOptionPane.showMessageDialog(null, "OS não cadastrada");
-            }   
+            }
         } catch (java.sql.SQLSyntaxErrorException erro) {
-            JOptionPane.showMessageDialog(null, "OS inválida");     
-        } catch (SQLException erro2){
-            JOptionPane.showMessageDialog(null, erro2);   
-            
+            JOptionPane.showMessageDialog(null, "OS inválida");
+        } catch (SQLException erro2) {
+            JOptionPane.showMessageDialog(null, erro2);
+
         }
     }
-    
-    private void alterarOs(){
-    
-    String sql = "UPDATE tbl_os SET tipo = ? , situacao = ?, equipamento = ?, defeito = ?, servico = ?, tecnico = ?, valor = ? WHERE os = ?";
+
+    private void alterarOs() {
+
+        String sql = "UPDATE tbl_os SET tipo = ? , situacao = ?, equipamento = ?, defeito = ?, servico = ?, tecnico = ?, valor = ? WHERE os = ?";
         try {
             prst = conn.prepareStatement(sql);
             prst.setString(1, tipo);
@@ -655,37 +713,37 @@ public class viewOS extends javax.swing.JInternalFrame {
             if ((txtIdClienteOS.getText().isEmpty()) || (txtEquipamentoOS.getText().isEmpty()) || (txtDefeitoOS.getText().isEmpty()) || cbxOS.getSelectedItem().equals(" ")) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
             } else {
-                prst.executeUpdate();    
+                prst.executeUpdate();
                 JOptionPane.showMessageDialog(null, "OS alterada com sucesso!");
                 limparCampos();
                 prst.close();
             }
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null,  "alterarOs"+ erro);
-           
-        } 
+            JOptionPane.showMessageDialog(null, "alterarOs" + erro);
+
+        }
     }
-    private void excluirOs(){
+
+    private void excluirOs() {
         int confirma = JOptionPane.showConfirmDialog(null, "Tem ceteza que deseja excluir essa OS?", "Atenção", JOptionPane.YES_NO_OPTION);
-        if (confirma== JOptionPane.YES_NO_OPTION) {
+        if (confirma == JOptionPane.YES_NO_OPTION) {
             String sql = "DELETE FROM tbl_os WHERE os = ?";
             try {
-                prst= conn.prepareStatement(sql);
+                prst = conn.prepareStatement(sql);
                 prst.setString(1, txtNumeroOs.getText());
                 prst.executeUpdate();
-                JOptionPane.showMessageDialog(null,  "OS excluida com sucesso!");
-                 limparCampos();
-               
-              
+                JOptionPane.showMessageDialog(null, "OS excluida com sucesso!");
+                limparCampos();
+
             } catch (Exception erro) {
-                 JOptionPane.showMessageDialog(null,  "excluirOs"+ erro);
+                JOptionPane.showMessageDialog(null, "excluirOs" + erro);
             }
-            
-        } 
-        
+
+        }
+
     }
-    
-    private void ImprimindoOs(){
+
+    private void ImprimindoOs() {
         // gerando impressão Os
         int confirma = JOptionPane.showConfirmDialog(null, "Confirma a impressão de Os?", "Atenção", JOptionPane.YES_NO_OPTION);
         if (confirma == JOptionPane.YES_NO_OPTION) {
@@ -697,21 +755,21 @@ public class viewOS extends javax.swing.JInternalFrame {
                 // usando a classe JasperPrint para preparar a impressão de Os
                 JasperPrint print = JasperFillManager.fillReport("C:/reports/os.jasper", filtro, conn);
                 // a linha abaixo exibi o relatorio atraves da classe JasperViewer
-                JasperViewer.viewReport(print,false);
+                JasperViewer.viewReport(print, false);
             } catch (JRException erro) {
                 JOptionPane.showMessageDialog(null, "Imprimindo Os" + erro);
             }
-        
+
         }
     }
-    
-    private void recuperarOs(){
+
+    private void recuperarOs() {
         // esse método corrige bug na impressão da Os logo depois de cadastrada, pois recuperar o ultimo numero da Os que é gerado automaticamente. 
         String sql;
         sql = "SELECT max(os)FROM tbl_os";
         try {
-            prst= conn.prepareStatement(sql);
-            rs=prst.executeQuery();
+            prst = conn.prepareStatement(sql);
+            rs = prst.executeQuery();
             if (rs.next()) {
                 txtNumeroOs.setText(rs.getString(1));
             }
@@ -719,7 +777,5 @@ public class viewOS extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, erro);
         }
     }
-     
-    }
- 
 
+}

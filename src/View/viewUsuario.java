@@ -1,33 +1,50 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ * The MIT License
+ *
+ * Copyright 2023 Felipe dos Santos.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package view;
 
 import java.sql.*;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
 import DAO.ConexaoBD;
+
 /**
  *
  * @author Felipe
  */
 public class viewUsuario extends javax.swing.JInternalFrame {
-    Connection conn ;  
-    PreparedStatement prst;
-    ResultSet rs ;
-    
 
-        /**
+    Connection conn;
+    PreparedStatement prst;
+    ResultSet rs;
+
+    /**
      * Creates new form viewUsuario
      */
     public viewUsuario() {
-        initComponents(); 
+        initComponents();
         conn = ConexaoBD.conectar();
-     
-       
+
     }
 
     /**
@@ -238,41 +255,41 @@ public class viewUsuario extends javax.swing.JInternalFrame {
     private void bttnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnCadastrarActionPerformed
 
         cadastrarUsuario();
-        limparCampos(); 
+        limparCampos();
     }//GEN-LAST:event_bttnCadastrarActionPerformed
 
     private void bttnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnExcluirActionPerformed
-    excluirUsuario();
-     limparCampos();
+        excluirUsuario();
+        limparCampos();
     }//GEN-LAST:event_bttnExcluirActionPerformed
 
     private void bttnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnAlterarActionPerformed
-      alterarUsuario();
-       limparCampos();
+        alterarUsuario();
+        limparCampos();
     }//GEN-LAST:event_bttnAlterarActionPerformed
 
     private void bttnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnConsultarActionPerformed
-      consultarUsuario();
+        consultarUsuario();
     }//GEN-LAST:event_bttnConsultarActionPerformed
 
     private void txtNomeUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeUsuarioKeyPressed
         //apertar enter para ir para o proximo campo
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtLoginUsuario.requestFocus();
         }
     }//GEN-LAST:event_txtNomeUsuarioKeyPressed
 
     private void txtLoginUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLoginUsuarioKeyPressed
-       //apertar enter para ir para o proximo campo
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+        //apertar enter para ir para o proximo campo
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtSenhaUsuario.requestFocus();
         }
     }//GEN-LAST:event_txtLoginUsuarioKeyPressed
 
     private void txtSenhaUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaUsuarioKeyPressed
-          //apertar enter para ir para o proximo campo
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-         cbxPerfil.requestFocus();
+        //apertar enter para ir para o proximo campo
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            cbxPerfil.requestFocus();
         }
     }//GEN-LAST:event_txtSenhaUsuarioKeyPressed
 
@@ -296,39 +313,40 @@ public class viewUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JPasswordField txtSenhaUsuario;
     // End of variables declaration//GEN-END:variables
 // metodo de consulta usuario
-public void consultarUsuario(){
-String sql = "SELECT *FROM tbl_usuario WHERE id_usuario = ?";
-    try {
-        prst= conn.prepareStatement(sql);
-        prst.setString(1, txtCodigoUsuario.getText());
-        rs = prst.executeQuery();
-        if (rs.next()) {
-            txtNomeUsuario.setText(rs.getString(2));
-            txtLoginUsuario.setText(rs.getString(3));
-            txtSenhaUsuario.setText(rs.getString(4));
-            //a linha abaixo refere ao combobox
-            cbxPerfil.setSelectedItem(rs.getString(5));
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuário não cadastrado!");
-            limparCampos();
+
+    public void consultarUsuario() {
+        String sql = "SELECT *FROM tbl_usuario WHERE id_usuario = ?";
+        try {
+            prst = conn.prepareStatement(sql);
+            prst.setString(1, txtCodigoUsuario.getText());
+            rs = prst.executeQuery();
+            if (rs.next()) {
+                txtNomeUsuario.setText(rs.getString(2));
+                txtLoginUsuario.setText(rs.getString(3));
+                txtSenhaUsuario.setText(rs.getString(4));
+                //a linha abaixo refere ao combobox
+                cbxPerfil.setSelectedItem(rs.getString(5));
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuário não cadastrado!");
+                limparCampos();
+            }
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, erro);
         }
-    } catch (SQLException erro) {
-        JOptionPane.showMessageDialog(null, erro);
     }
-}
 
 //metodo para limpar campos
-public void limparCampos() {
+    public void limparCampos() {
         txtNomeUsuario.setText("");
         txtLoginUsuario.setText("");
         txtSenhaUsuario.setText("");
         txtCodigoUsuario.setText("");
-        txtCodigoUsuario.requestFocus(); 
-             
+        txtCodigoUsuario.requestFocus();
+
     }
 
 // metodo para cadastrar usuario
-public void cadastrarUsuario() {
+    public void cadastrarUsuario() {
         String sql = "INSERT INTO tbl_usuario (id_usuario, nome_usuario, login_usuario , senha_usuario, perfil) VALUES (?,?,?,?,?)";
         try {
             prst = conn.prepareStatement(sql);
@@ -344,7 +362,6 @@ public void cadastrarUsuario() {
                 prst.executeUpdate();
                 prst.close();
                 JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
-                
 
             }
         } catch (SQLException erro) {
@@ -353,11 +370,12 @@ public void cadastrarUsuario() {
         }
     }
 // metodo para alterar dados do usuario
-private void alterarUsuario() {
+
+    private void alterarUsuario() {
         String sql = "UPDATE tbl_usuario SET nome_usuario = ? ,login_usuario = ? , senha_usuario = ?, perfil= ? WHERE id_usuario = ?";
         try {
             prst = conn.prepareStatement(sql);
-          
+
             prst.setString(1, txtNomeUsuario.getText());
             prst.setString(2, txtLoginUsuario.getText());
             prst.setString(3, String.valueOf(txtSenhaUsuario.getPassword()));
@@ -370,7 +388,6 @@ private void alterarUsuario() {
                 prst.executeUpdate();
                 prst.close();
                 JOptionPane.showMessageDialog(null, "Dados do usuário alterado com sucesso!");
-             
 
             }
         } catch (SQLException erro) {
@@ -380,21 +397,20 @@ private void alterarUsuario() {
     }
 
     //metodo para excluir usuario
-private void excluirUsuario(){
-    int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir este usuário ?", "Atenção!" , JOptionPane.YES_NO_OPTION);
-         if (confirma==JOptionPane.YES_OPTION) {
-              String sql = "DELETE FROM tbl_usuario WHERE id_usuario= ?";
-              try {
-                 prst = conn.prepareStatement(sql);
-                 prst.setString(1,txtCodigoUsuario.getText());
-                 prst.executeUpdate();
-             } catch (Exception erro) {
-                JOptionPane.showMessageDialog(null,erro);
-             }
-        
-    } 
-    
-}
+    private void excluirUsuario() {
+        int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir este usuário ?", "Atenção!", JOptionPane.YES_NO_OPTION);
+        if (confirma == JOptionPane.YES_OPTION) {
+            String sql = "DELETE FROM tbl_usuario WHERE id_usuario= ?";
+            try {
+                prst = conn.prepareStatement(sql);
+                prst.setString(1, txtCodigoUsuario.getText());
+                prst.executeUpdate();
+            } catch (SQLException erro) {
+                JOptionPane.showMessageDialog(null, erro);
+            }
 
-    
+        }
+
+    }
+
 }

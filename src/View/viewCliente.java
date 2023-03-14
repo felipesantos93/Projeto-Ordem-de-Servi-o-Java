@@ -1,6 +1,25 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ * The MIT License
+ *
+ * Copyright 2023 Felipe dos Santos.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package view;
 
@@ -17,10 +36,10 @@ import DAO.ConexaoBD;
  * @author Felipe
  */
 public final class viewCliente extends javax.swing.JInternalFrame {
-    Connection conn ;  
+
+    Connection conn;
     PreparedStatement prst;
-    ResultSet rs ;
-    
+    ResultSet rs;
 
     /**
      * Creates new form viewCliente
@@ -297,45 +316,45 @@ public final class viewCliente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttnCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnCadastrarClienteActionPerformed
-  
-          cadastrarCliente();
-          limparCampos();  
- 
-       
+
+        cadastrarCliente();
+        limparCampos();
+
+
     }//GEN-LAST:event_bttnCadastrarClienteActionPerformed
 
     private void txtPesquisaClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaClienteKeyReleased
         //chama o método pesquisar clientes 
-       pesquisarClientes();
+        pesquisarClientes();
     }//GEN-LAST:event_txtPesquisaClienteKeyReleased
 
     private void bttnAlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnAlterarClienteActionPerformed
-       alterarCliente();
-       
-        
+        alterarCliente();
+
+
     }//GEN-LAST:event_bttnAlterarClienteActionPerformed
 
     private void txtNomeCLienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeCLienteKeyPressed
-          //apertar enter para ir para o proximo campo
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+        //apertar enter para ir para o proximo campo
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtFoneCliente.requestFocus();
-        } 
+        }
     }//GEN-LAST:event_txtNomeCLienteKeyPressed
 
     private void txtFoneClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFoneClienteKeyPressed
-         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtCidadeCliente.requestFocus();
         }
     }//GEN-LAST:event_txtFoneClienteKeyPressed
 
     private void txtCidadeClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCidadeClienteKeyPressed
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtEnderecoCliente.requestFocus();
         }
     }//GEN-LAST:event_txtCidadeClienteKeyPressed
 
     private void txtEnderecoClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnderecoClienteKeyPressed
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtEmailCliente.requestFocus();
         }
     }//GEN-LAST:event_txtEnderecoClienteKeyPressed
@@ -378,10 +397,9 @@ public final class viewCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtPesquisaCliente;
     // End of variables declaration//GEN-END:variables
 
-
     private void cadastrarCliente() {
-         String sql = "INSERT INTO tbl_clientes (nome_cliente, fone_cliente , cidade_cliente, endereco_cliente, email_cliente ) VALUES (?,?,?,?,?)";
-        
+        String sql = "INSERT INTO tbl_clientes (nome_cliente, fone_cliente , cidade_cliente, endereco_cliente, email_cliente ) VALUES (?,?,?,?,?)";
+
         try {
             prst = conn.prepareStatement(sql);
             prst.setString(1, txtNomeCLiente.getText());
@@ -404,6 +422,7 @@ public final class viewCliente extends javax.swing.JInternalFrame {
 
         }
     }
+
     // método abaixo limpa os campos do formulario
     public void limparCampos() {
         txtNomeCLiente.setText("");
@@ -413,18 +432,17 @@ public final class viewCliente extends javax.swing.JInternalFrame {
         txtCidadeCliente.setText("");
         txtCodigoCliente.setText("");
         txtNomeCLiente.requestFocus();
-       ((DefaultTableModel)tabelaCliente.getModel()).setRowCount(0);
-       
-        
+        ((DefaultTableModel) tabelaCliente.getModel()).setRowCount(0);
+
     }
-    
+
     //método para  pesquisar clientes pelo nome com filtro
     private void pesquisarClientes() {
-        
+
         String sql = "SELECT id_cliente AS CODIGO, nome_cliente AS NOME, fone_cliente AS FONE, cidade_cliente AS CIDADE , endereco_cliente AS ENDERECO , email_cliente AS EMAIL  FROM tbl_clientes WHERE nome_cliente LIKE ?";
         try {
-            prst=  conn.prepareStatement(sql);
-            
+            prst = conn.prepareStatement(sql);
+
             //passando o conteúdo da caixa de pesquisa para o ?
             //atenção ao "%" pois ele é a continuação da String slq
             prst.setString(1, txtPesquisaCliente.getText() + "%");
@@ -436,8 +454,9 @@ public final class viewCliente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "PesquisarClientes: " + erro);
         }
     }
+
     //metodo para setar os campos do fomulario para tabela  
-    private void setarCamposCliente(){
+    private void setarCamposCliente() {
         int setar = tabelaCliente.getSelectedRow();
         txtCodigoCliente.setText(tabelaCliente.getModel().getValueAt(setar, 0).toString());
         txtNomeCLiente.setText(tabelaCliente.getModel().getValueAt(setar, 1).toString());
@@ -445,23 +464,22 @@ public final class viewCliente extends javax.swing.JInternalFrame {
         txtCidadeCliente.setText(tabelaCliente.getModel().getValueAt(setar, 3).toString());
         txtEnderecoCliente.setText(tabelaCliente.getModel().getValueAt(setar, 4).toString());
         txtEmailCliente.setText(tabelaCliente.getModel().getValueAt(setar, 5).toString());
-       //a linha abaixo desabilita o botão adicionar
-      bttnCadastrarCliente.setEnabled(false);
-        
-        
+        //a linha abaixo desabilita o botão adicionar
+        bttnCadastrarCliente.setEnabled(false);
+
     }
 
 // metodo para alterar dados do usuario
     private void alterarCliente() {
         String sql = "UPDATE tbl_clientes SET nome_cliente =? , fone_cliente = ? , cidade_cliente = ? , endereco_cliente =?, email_cliente = ? WHERE id_cliente = ?";
-          try {
+        try {
             prst = conn.prepareStatement(sql);
             prst.setString(1, txtNomeCLiente.getText());
             prst.setString(2, txtFoneCliente.getText());
             prst.setString(3, txtCidadeCliente.getText());
             prst.setString(4, txtEnderecoCliente.getText());
             prst.setString(5, txtEmailCliente.getText());
-             prst.setString(6, txtCodigoCliente.getText());
+            prst.setString(6, txtCodigoCliente.getText());
             // a linha abaixo atualiza a tabela usuario com os dados do formulario
             if ((txtNomeCLiente.getText().isEmpty()) | (txtFoneCliente.getText().isEmpty()) | (txtEmailCliente.getText().isEmpty())) {
                 JOptionPane.showMessageDialog(null, "Preencha os campos obrigatorios!");
@@ -471,7 +489,6 @@ public final class viewCliente extends javax.swing.JInternalFrame {
                 bttnCadastrarCliente.setEnabled(true);
                 prst.close();
                 JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso!");
-                
 
             }
         } catch (SQLException erro) {
@@ -479,33 +496,5 @@ public final class viewCliente extends javax.swing.JInternalFrame {
 
         }
     }
-   /*
-   metodo para excluir cliente
-private void excluirCliente(){
-    int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir este cliente ?", "Atenção!" , JOptionPane.YES_NO_OPTION);
-         if (confirma==JOptionPane.YES_OPTION) {
-              String sql = "DELETE FROM tbl_clientes WHERE id_cliente = ?";
-              try {
-                 prst = conn.prepareStatement(sql);
-                 prst.setString(1,txtCodigoCliente.getText());
-                 prst.executeUpdate();
-             } catch (SQLException erro) {
-                JOptionPane.showMessageDialog(null,erro);
-             }
-        
-    } 
-    
+
 }
-*/
-}
-    
-     
-
- 
-
- 
-    
-    
-
-  
-
