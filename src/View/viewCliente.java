@@ -46,7 +46,6 @@ public final class viewCliente extends javax.swing.JInternalFrame {
         jToggleButton1 = new javax.swing.JToggleButton();
         bttnCadastrarCliente = new javax.swing.JButton();
         bttnAlterarCliente = new javax.swing.JButton();
-        bttnExcluirCliente = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelaCliente = new javax.swing.JTable();
@@ -103,14 +102,6 @@ public final class viewCliente extends javax.swing.JInternalFrame {
         bttnAlterarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttnAlterarClienteActionPerformed(evt);
-            }
-        });
-
-        bttnExcluirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/icons8-excluir-lixeira-48.png"))); // NOI18N
-        bttnExcluirCliente.setToolTipText("Excluir");
-        bttnExcluirCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnExcluirClienteActionPerformed(evt);
             }
         });
 
@@ -251,10 +242,8 @@ public final class viewCliente extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(bttnCadastrarCliente)
                                         .addGap(18, 18, 18)
-                                        .addComponent(bttnAlterarCliente)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(bttnExcluirCliente)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addComponent(bttnAlterarCliente)))
+                                .addGap(0, 428, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -294,15 +283,13 @@ public final class viewCliente extends javax.swing.JInternalFrame {
                                 .addComponent(txtPesquisaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
                                 .addComponent(bttnCadastrarCliente))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bttnExcluirCliente)))))
+                                .addComponent(jLabel7)))))
                 .addGap(77, 77, 77))
         );
 
@@ -353,11 +340,6 @@ public final class viewCliente extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtEnderecoClienteKeyPressed
 
-    private void bttnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnExcluirClienteActionPerformed
-     excluirCliente();
-     
-    }//GEN-LAST:event_bttnExcluirClienteActionPerformed
-
     private void tabelaClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClienteMouseClicked
         // evento que sera usado para setar os campos da tabela (clicando com o mouse)
         setarCamposCliente();
@@ -371,7 +353,6 @@ public final class viewCliente extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnAlterarCliente;
     private javax.swing.JButton bttnCadastrarCliente;
-    private javax.swing.JButton bttnExcluirCliente;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -498,7 +479,8 @@ public final class viewCliente extends javax.swing.JInternalFrame {
 
         }
     }
-     //metodo para excluir cliente
+   /*
+   metodo para excluir cliente
 private void excluirCliente(){
     int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir este cliente ?", "Atenção!" , JOptionPane.YES_NO_OPTION);
          if (confirma==JOptionPane.YES_OPTION) {
@@ -507,18 +489,14 @@ private void excluirCliente(){
                  prst = conn.prepareStatement(sql);
                  prst.setString(1,txtCodigoCliente.getText());
                  prst.executeUpdate();
-                 JOptionPane.showMessageDialog(null, "Cliente excluido com sucesso!");
-                 limparCampos();
-                 bttnCadastrarCliente.setEnabled(true);
              } catch (SQLException erro) {
                 JOptionPane.showMessageDialog(null,erro);
              }
         
-    } else {
-    }
+    } 
     
 }
-    
+*/
 }
     
      

@@ -392,8 +392,7 @@ private void excluirUsuario(){
                 JOptionPane.showMessageDialog(null,erro);
              }
         
-    } else {
-    }
+    } 
     
 }
 
